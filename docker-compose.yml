@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: healthai_db
+      POSTGRES_PASSWORD: password
+
+  backend:
+    build: ./api
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db
+
+  frontend:
+    build: ./dashboard
+    ports:
+      - "3000:3000"
